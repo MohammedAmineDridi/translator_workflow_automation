@@ -33,7 +33,7 @@ Below is an example of the expected Excel format used for translation input:
 
 Below is the translator automation worflow process
 
-![Translator Automation Worflow Process](assets/translator_automation_workflow.PNG)
+![Translator Automation Worflow Process](assets/translator_automation_workflow.png)
 
 ---
 
