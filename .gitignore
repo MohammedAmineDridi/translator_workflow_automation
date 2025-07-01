@@ -1,0 +1,17 @@
+# Dart/Pub
+.dart_tool/
+.packages
+.pub-cache/
+build/
+.idea/
+.vscode/
+*.iml
+
+# Credentials
+service_account.json
+
+# Excel translation source file
+assets/translation.xlsx
+
+# Ignore generated JSON files in a specific folder (optional)
+translations/*.json
