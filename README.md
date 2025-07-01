@@ -44,4 +44,5 @@ PS : don't forget to download and add the service_account.json file from GCS (Go
 ```bash
 git clone https://github.com/MohammedAmineDridi/translator_workflow_automation.git
 cd translator_automation
+dart pub get
 dart run
