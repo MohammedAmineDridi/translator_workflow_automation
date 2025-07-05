@@ -59,7 +59,7 @@ class JsonGenerator {
       _it["key"] = "it_IT";
 
       for (int row = dataBeginRow; row < excelSheet!.rows.length; row++) {
-        final key = _getCellValue(row, 1);
+        final key = _getCellValue(row, excelParser.excelFileConfig.languageExcelPositionMap['key']!);
         _fr[key] = _getCellValue(row, excelParser.excelFileConfig.languageExcelPositionMap['fr']!);
         _en[key] = _getCellValue(row, excelParser.excelFileConfig.languageExcelPositionMap['en']!);
         _es[key] = _getCellValue(row, excelParser.excelFileConfig.languageExcelPositionMap['es']!);
@@ -74,8 +74,14 @@ class JsonGenerator {
 
   /// Extract cell value
   String _getCellValue(int row, int headerIndex) {
-    final colIndex = sheetHeaderMap![sheetHeader![headerIndex]]!;
-    return excelSheet!.rows[row][colIndex]?.value.toString() ?? '';
+    if (sheetHeader == null || sheetHeaderMap == null) return '';
+    if (headerIndex >= sheetHeader!.length) return '';
+
+    final columnKey = sheetHeader![headerIndex];
+    final colIndex = sheetHeaderMap![columnKey];
+    if (colIndex == null) return '';
+
+    return excelSheet!.rows[row][colIndex]?.value?.toString() ?? '';
   }
 
   /// Write all JSON maps to files
@@ -106,8 +112,8 @@ class JsonGenerator {
 
   /// Get old JSON files version
   Future<void> getOldJsonFilesVersion() async {
-    oldTranslationsJsonFilesVersion = await cloudFileUploader.getOldJsonFilesVersion();
     print("\n🔍================== Step 2: Versioning =============");
+    oldTranslationsJsonFilesVersion = await cloudFileUploader.getOldJsonFilesVersion();
     print("🔄 Old JSON files version = $oldTranslationsJsonFilesVersion");
   }
 }

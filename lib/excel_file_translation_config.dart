@@ -6,13 +6,7 @@ class ExcelTranslationConfig {
   final int headerBeginCol;
   final String bucketName;
   final Map<String,int> languageExcelPositionMap;
-
-  ExcelTranslationConfig({
-    required this.sheetName,
-    this.headerBeginRow = 0,
-    this.headerBeginCol = 0,
-    /// Put your language position in excel file here
-    this.languageExcelPositionMap = const {
+  static const Map<String, int> defaultLanguageMap = {
     'fr': 0,
     'key': 1,
     'en': 2,
@@ -21,7 +15,20 @@ class ExcelTranslationConfig {
     'pt': 5,
     'nl': 6,
     'it': 7,
-    },
+  };
+
+  ExcelTranslationConfig({
+    required this.sheetName,
+    this.headerBeginRow = 0,
+    this.headerBeginCol = 0,
+    this.languageExcelPositionMap = defaultLanguageMap, // Put your language position in excel file here
     required this.bucketName,
   });
+
+  @override
+  String toString() {
+  return 'ExcelTranslationConfig(sheetName: $sheetName, headerBeginRow: $headerBeginRow, '
+         'headerBeginCol: $headerBeginCol, bucketName: $bucketName, '
+         'languageExcelPositionMap: $languageExcelPositionMap)';
+  }
 }

@@ -28,10 +28,10 @@ Future<void> main(List<String> arguments) async {
 Future<void> runTranslationPipeline({required String excelFilePath}) async {
   try {
     final excelFileconfig = ExcelTranslationConfig(
-      sheetName: "Mobile",
-      headerBeginRow: 2,
-      headerBeginCol: 2,
-      bucketName: "test_translation_bucket1",
+      sheetName: "Mobile", // Put your sheetName here
+      headerBeginRow: 2, // Put your headerBeginRow here (see screenShot in readme file)
+      headerBeginCol: 2,// Put your headerBeginCol here (see screenShot in readme file)
+      bucketName: "test_translation_bucket1", // Put your bucketName here
     );
 
     final excelParser = ExcelParser(
@@ -41,7 +41,7 @@ Future<void> runTranslationPipeline({required String excelFilePath}) async {
 
     final uploader = await CloudFileUploader.create(
       bucketName: excelFileconfig.bucketName,
-      //folderPrefix: "test_translation_sub_bucket2",
+      //folderPrefix: "sub_bucket1/sub_sub_bucket1", // if you have a buckets hierarchy put your folder prefix here ,eg:{yourBucketName}/SubBucket1/....
     );
 
     final generator = JsonGenerator(
