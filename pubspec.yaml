@@ -11,9 +11,7 @@ dependencies:
   excel: ^4.0.6
   googleapis_auth: ^1.4.0
   googleapis: ^13.1.0
-  http: ^0.13.6
-  #connectivity_plus: ^6.1.4
-  # path: ^1.8.0
+  http: ^1.2.2
 
 dev_dependencies:
   lints: ^3.0.0

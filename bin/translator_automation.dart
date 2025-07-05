@@ -3,6 +3,7 @@ import 'package:translator_automation/excel_parser.dart';
 import 'package:translator_automation/json_generator.dart';
 import 'package:translator_automation/cloud_file_uploader.dart';
 import 'package:translator_automation/excel_file_translation_config.dart';
+import 'package:translator_automation/remote_config_cloud_function.dart';
 
 Future<void> main(List<String> arguments) async {
   stdout.write("📥 Enter the Excel (.xlsx) filename (with path if needed): ");
@@ -50,7 +51,10 @@ Future<void> runTranslationPipeline({required String excelFilePath}) async {
     );
 
     generator.generateJsonFiles();
+
     await uploader.uploadNewJsonFiles().then((value) => {
+      // (OPTIONAL) add remote config increment lang variable value +1 (to track the jsons version in firebase remote config var)
+      RemoteConfigCloudFunction(callStatus: false).notifyLangVersionUpdate(projectId: "",region: "",cloudFunctionName: ""), // put your {projectID,Region,CloudFunctionName}
       print("\n✅================== ✅ DONE ✅ ========================"),
       print("🎉 Translation pipeline completed successfully 😁")
     }).onError((error, stackTrace) => {
