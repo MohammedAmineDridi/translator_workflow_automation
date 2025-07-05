@@ -78,14 +78,14 @@ class CloudFileUploader {
     }
 
     try {
-      await deleteAllFilesInBucket();
+      await _deleteAllFilesInBucket();
       print("\n🚀================== Step 4: Uploading new JSON files to Google Cloud Platform ================");
       for (final fileName in files) {
         await _uploadFileToGCS(fileName);
         await _makeObjectPublic(fileName);
       }
 
-      deleteAllLocalJsonFiles();
+      _deleteAllLocalJsonFiles();
     } catch (e) {
       print("❌ Error during upload: $e");
     }
@@ -120,7 +120,7 @@ class CloudFileUploader {
     }
   }
 
-  Future<void> deleteAllFilesInBucket() async {
+  Future<void> _deleteAllFilesInBucket() async {
     try {
       final objects = await storageApi.objects.list(
         bucketName,
@@ -180,7 +180,7 @@ class CloudFileUploader {
     }
   }
 
-  void deleteAllLocalJsonFiles() {
+  void _deleteAllLocalJsonFiles() {
     final currentDir = Directory.current;
     final regex = RegExp(r'_(\d+)\.json$');
     final jsonFiles = currentDir.listSync().whereType<File>().where((file) {
